@@ -29,14 +29,20 @@ const inputStyle = isHidden => ({
   padding: 0,
 });
 
-const Input = ({ getStyles, innerRef, isHidden, ...props }: InputProps) => (
+const Input = ({ getStyles, innerRef, isHidden, ...props }: InputProps) => {
+  const onFocus = (event) => {
+    console.log('ON FOCUS IS BEING CALLED IN AUTOSIZE INPUT');
+    props.onFocus(event);
+  };
+  return (
   <Div css={getStyles('input', props)}>
     <AutosizeInput
       className={className('input')}
       inputRef={innerRef}
       inputStyle={inputStyle(isHidden)}
+      onFocus={onFocus}
       {...props}
     />
-  </Div>
-);
+  </Div>);
+};
 export default Input;
